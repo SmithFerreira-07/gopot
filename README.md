@@ -9,31 +9,38 @@ A simple SSH honeypot written in Go that simulates an SSH server to log attempte
 - Captures usernames and passwords from login attempts
 - Runs on a specified TCP port (default: 2222)
 - Handles multiple concurrent connections
+- Dockerized for easy deployment
 
 ## Prerequisites
 
-- Go 1.15 or higher
-- Administrative privileges (for binding to ports)
+- Docker
+- OR
+  - Go 1.15 or higher
+  - Administrative privileges (for binding to ports)
 
-## Installation
+## Installation & Usage
+
+### Using Docker (Recommended)
+
+1. Build the Docker image:
+```bash
+docker build -t ssh-honeypot .
+```
+
+2. Run the container:
+```bash
+docker run -p 2222:2222 ssh-honeypot
+```
+
+### Manual Installation
 
 1. Clone this repository
 2. Navigate to the project directory
-3. Build the executable:
+3. Build and run:
 ```bash
-go build -o ssh-honeypot
+go build -o honeypot main.go
+./honeypot
 ```
-
-## Usage
-
-1. Run the honeypot:
-```bash
-./ssh-honeypot
-```
-
-The server will start listening on port 2222 by default.
-
-To change the port, modify the `address` variable in the `main()` function.
 
 ## Output
 
@@ -64,21 +71,3 @@ This tool should only be used in controlled environments for educational or rese
 MIT License
 
 Copyright (c) 2024
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
